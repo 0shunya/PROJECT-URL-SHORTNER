@@ -1,4 +1,5 @@
 import express from 'express'
+import UserRouter from './routes/user.routes.js'
 
 const app = express();
 const PORT = process.env.PORT ?? 8000;
@@ -8,6 +9,8 @@ app.use(express.json());
 app.get('/', (req, res) => {
     return res.json({ status: 'server is up and running...' })
 })
+
+app.use('/user', UserRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is runninng on PORT ${PORT}`);

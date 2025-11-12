@@ -9,11 +9,14 @@ const router = express.Router();
 
 router.post('/signup',  async (req, res) => {
     // const { firstname, lastname, email, password } = req.body;
-    const validationResult = await signupPostRequestBodySchema.safeParseAsync;
+    const validationResult = await signupPostRequestBodySchema.safeParseAsync(req.body);
 
     if(validationResult.error) {
-        return res.status(400).json({ error: validationResult.error. })
+        // return res.status(400).json({ error: validationResult.error.message})
+        return res.status(400).json({ error: validationResult.error.format})
     }
+
+    const { firstname, lastname, email, password } = validationResult.data;
 
     const [existingUser]  = await db
                             .select({
