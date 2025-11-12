@@ -1,0 +1,12 @@
+import { db } from '../db/index.js';
+import { UsersTable } from '../models/user.model.js';
+
+export async function getUserByEmail(email) {
+        const [existingUser]  = await db
+                                .select({
+                                    id: UsersTable.id,
+                                })
+                                .from(UsersTable)
+                                .where(eq(UsersTable.email, email));
+        return existingUser;
+}
