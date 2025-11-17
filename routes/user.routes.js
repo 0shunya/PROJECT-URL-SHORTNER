@@ -1,6 +1,6 @@
 import express from 'express';
 import { db } from '../db/index.js';
-import { UsersTable } from '../models/user.model.js';
+import { UsersTable } from '../models/user.model.js'; 
 import { signupPostRequestBodySchema } from '../validation/request.validation.js'
 import { hashedPasswordWithSalt } from '../utils/hash.js';
 import { getUserByEmail } from '../services/user.service.js'
