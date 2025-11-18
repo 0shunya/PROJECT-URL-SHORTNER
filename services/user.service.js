@@ -5,6 +5,11 @@ export async function getUserByEmail(email) {
         const [existingUser]  = await db
                                 .select({
                                     id: UsersTable.id,
+                                    firstname: UsersTable.firstname,
+                                    lastname: UsersTable.lastname,
+                                    email: UsersTable.email,
+                                    salt: UsersTable.salt,
+                                    password: UsersTable.password,
                                 })
                                 .from(UsersTable)
                                 .where(eq(UsersTable.email, email));
