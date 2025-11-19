@@ -1,11 +1,11 @@
 import express from 'express';
 import { db } from '../db/index.js';
 import { UsersTable } from '../models/user.model.js'; 
-import { signupPostRequestBodySchema } from '../validation/request.validation.js'
-import { hashedPasswordWithSalt, loginPostRequestBodySchema } from '../utils/hash.js';
-import { getUserByEmail } from '../services/user.service.js'
-import e from 'express';
-import { error } from 'console';
+import { signupPostRequestBodySchema, loginPostRequestBodySchema } from '../validation/request.validation.js'
+import { hashedPasswordWithSalt } from '../utils/hash.js';
+import { createUserToken } from '../utils/token.js';
+import { getUserByEmail } from '../services/user.service.js';
+import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
@@ -55,6 +55,17 @@ router.post('/login', async (req, res) => {
    if(!user) {
         return res.status(404).json({ error: `User with email ${email} does not exist` })
    }
+
+   const { password: hashedPassword } = hashedPasswordWithSalt(password, user.salt)
+
+   if(user.password !== hashedPassword) {
+    return res.status(404).json({ error: 'Invalid Password' })
+   }
+
+   const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
+   createUserToken({ id: user.id })
+
+   return res.json({ token })
 
 })
 

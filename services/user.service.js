@@ -1,5 +1,6 @@
 import { db } from '../db/index.js';
 import { UsersTable } from '../models/user.model.js';
+import { eq } from "drizzle-orm";
 
 export async function getUserByEmail(email) {
         const [existingUser]  = await db
