@@ -8,6 +8,13 @@
       "when": 1762675023611,
       "tag": "0000_nostalgic_sunfire",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1763817072582,
+      "tag": "0001_classy_warbound",
+      "breakpoints": true
     }
   ]
 }

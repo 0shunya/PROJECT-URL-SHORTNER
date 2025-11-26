@@ -10,6 +10,8 @@ import jwt from 'jsonwebtoken';
 const router = express.Router();
 
 router.post('/signup',  async (req, res) => {
+    console.log('Signup route hit');
+    console.log('Request body:', req.body);
     // const { firstname, lastname, email, password } = req.body;
     const validationResult = await signupPostRequestBodySchema.safeParseAsync(req.body);
 
@@ -24,10 +26,11 @@ router.post('/signup',  async (req, res) => {
 
     if (existingUser) return res.status(400).json({ error: `users with email ${email} already exists`});
     
-    const salt = randomBytes(256).toString('hex');
-    const hashedPassword = createHmac('sha256', salt).update(password).digest('hex');
+    // const salt = randomBytes(256).toString('hex');
+    // const hashedPassword = createHmac('sha256', salt).update(password).digest('hex');
 
-    hashedPasswordWithSalt(password)
+    const { salt, hashedPassword } = hashedPasswordWithSalt(password);
+
 
     const [user] = await db.insert(UsersTable).values({
         email,

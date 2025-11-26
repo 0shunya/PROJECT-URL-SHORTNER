@@ -6,7 +6,7 @@ const app = express();
 const PORT = process.env.PORT ?? 8000;
 
 app.use(express.json());
-app.use(authenticationMiddleware)
+// app.use(authenticationMiddleware)
 
 app.get('/', (req, res) => {
     return res.json({ status: 'server is up and running...' })
