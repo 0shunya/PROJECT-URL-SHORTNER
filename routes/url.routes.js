@@ -29,7 +29,7 @@ router.post('/shorten', async function (req, res) {
         userId: req.user.id,
    }).returning({ id: urlsTable.id, shortCode: urlsTable.shortCode, targetURL: urlsTable.targetURL });
 
-   return res.status(201).json({ id: result.id })
+   return res.status(201).json({ id: result.id, shortCode: result.shortCode, targetURL: result.targetURL })
 });
 
 export default router;
