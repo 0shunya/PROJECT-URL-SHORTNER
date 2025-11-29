@@ -12,10 +12,10 @@ app.use(authenticationMiddleware)
 
 app.get('/', (req, res) => {
     return res.json({ status: 'server is up and running...' })
-})
+});
 
-app.use(urlRouter);
 app.use('/user', UserRouter);
+app.use(urlRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is runninng on PORT ${PORT}`);
