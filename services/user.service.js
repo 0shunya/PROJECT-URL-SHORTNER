@@ -17,14 +17,14 @@ export async function getUserByEmail(email) {
         return existingUser;
 }
 
-export async function shortenURLs(params) {
-       const shortCode = code ?? nanoid(6)
+// export async function shortenURLs(params) {
+//        const shortCode = code ?? nanoid(6)
     
-       const [result] = await db.insert(urlsTable).values({
-            shortCode,
-            targetURL: url,
-            userId: req.user.id,
-       }).returning({ id: urlsTable.id, shortCode: urlsTable.shortCode, targetURL: urlsTable.targetURL });
+//        const [result] = await db.insert(urlsTable).values({
+//             shortCode,
+//             targetURL: url,
+//             userId: req.user.id,
+//        }).returning({ id: urlsTable.id, shortCode: urlsTable.shortCode, targetURL: urlsTable.targetURL });
     
-       return res.status(201).json({ id: result.id, shortCode: result.shortCode, targetURL: result.targetURL });
-}
+//        return res.status(201).json({ id: result.id, shortCode: result.shortCode, targetURL: result.targetURL });
+// }
